@@ -1,9 +1,15 @@
 package baseBallGame;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class GameRecord {
+	
+	/*
+	   Project Description
+	   C: remove the previous value
+	   D: add value: previous value * 2
+	   +: add value: sum of 2 previous values;
+	 */
 
 	public static void main(String[] args) {
 
@@ -53,9 +59,9 @@ public class GameRecord {
 
 			if ((value.get(i).equalsIgnoreCase("+") && i > 0)) {
 				check.add("+");
-				int firsttnum = Integer.parseInt(check.get(check.indexOf("+")-1));
-				int secnum = Integer.parseInt(check.get(check.indexOf("+")-2));
-				check.add(String.valueOf(firsttnum+secnum));
+				int firstNum = Integer.parseInt(check.get(check.indexOf("+")-1));
+				int secendNum = Integer.parseInt(check.get(check.indexOf("+")-2));
+				check.add(String.valueOf(firstNum+secendNum));
 				check.remove("+");
 			}
 

@@ -7,58 +7,63 @@ public class GameRecord {
 
 	public static void main(String[] args) {
 
-		ArrayList<String> score = new ArrayList<>();
+		ArrayList<String> scoreOps1 = new ArrayList<>();
+		ArrayList<String> scoreOps2 = new ArrayList<>();
+		ArrayList<String> scoreOps3 = new ArrayList<>();
 
-//		score.add("5");
-//		score.add("2");
-//		score.add("c");
-//		score.add("d");
-//		score.add("+");
+		scoreOps1.add("5");
+		scoreOps1.add("2");
+		scoreOps1.add("c");
+		scoreOps1.add("d");
+		scoreOps1.add("+");
 
-		score.add("5");
-		score.add("-2");
-		score.add("4");
-		score.add("c");
-		score.add("d");
-		score.add("9");
-		score.add("+");
-		score.add("+");
+		scoreOps2.add("5");
+		scoreOps2.add("-2");
+		scoreOps2.add("4");
+		scoreOps2.add("c");
+		scoreOps2.add("d");
+		scoreOps2.add("9");
+		scoreOps2.add("+");
+		scoreOps2.add("+");
+		
+		scoreOps3.add("1");
 
-		GameRecord.manipulateArray(score);
+		GameRecord.manipulateArray(scoreOps1);
+		GameRecord.manipulateArray(scoreOps2);
+		GameRecord.manipulateArray(scoreOps3);
 
 	}
 
 	public static void manipulateArray(ArrayList<String> value) {
 
 		ArrayList<String> check = new ArrayList<>();
-		String holdValue = "";
+		String previusValue = "";
 		for (int i = 0; i < value.size(); i++) {
-			holdValue = value.get(i);
+			
 			if (value.get(i).equalsIgnoreCase("c") && i > 0) {
-				check.remove(check.get(check.indexOf("c") - 1));
-				check.remove("c");
+				check.remove(previusValue);
 			}
 
 			if ((value.get(i).equalsIgnoreCase("d") && i > 0)) {
-
-				String num = check.get(check.indexOf("d") - 1);
+				check.add("d");
+				int num = Integer.parseInt(check.get(check.indexOf("d")-1));
+				check.add(String.valueOf(num* 2));
 				check.remove("d");
-				check.add(String.valueOf(Integer.parseInt(num) * 2));
 			}
 
 			if ((value.get(i).equalsIgnoreCase("+") && i > 0)) {
+				check.add("+");
+				int firsttnum = Integer.parseInt(check.get(check.indexOf("+")-1));
+				int secnum = Integer.parseInt(check.get(check.indexOf("+")-2));
+				check.add(String.valueOf(firsttnum+secnum));
 				check.remove("+");
-				int sum = 0;
-				int sub = 0;
-				for (String n : check) {
-//					System.out.println(n);
-					if (!n.contains("-")) {
-						sum += Integer.parseInt(n);
+			}
 
-					}
-//					 sub += Integer.parseInt(n);
-				}
-				check.add(String.valueOf(sum - sub));
+			if (!value.get(i).equalsIgnoreCase("c") && !value.get(i).equalsIgnoreCase("d")
+					&& !value.get(i).equalsIgnoreCase("+")) {
+				
+				check.add(value.get(i));
+				previusValue = value.get(i);
 			}
 			System.out.println(check);
 		}
@@ -66,7 +71,8 @@ public class GameRecord {
 		for (String n : check) {
 			sum += Integer.parseInt(n);
 		}
-		System.out.println(sum);
+		System.out.println("\nTotal sum: "+ sum);
+		System.out.println();
 	}
 
 }
